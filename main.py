@@ -1,14 +1,19 @@
-import matplotlib.pyplot as plt
 import gdsfactory as gf
+import matplotlib.pyplot as plt
 import sky130
+from gdsfactory.generic_tech import get_generic_pdk
 
-# probably wrong
-c = sky130.components.sky130_fd_sc_hd__nand2_2()
+gf.config.rich_output()
 
-c2 = sky130.components.sky130_fd_sc_hd__nand2_2()
-pc2 = c2 << gf.components.pad_array(orientation=270, columns=3)
-route = gf.routing.get_route_electrical(c.ports['VPWR'], pc2.ports['VPWR1'])
+PDK = get_generic_pdk()
+PDK.activate()
+
+c = gf.Component(name="NOT from 2 NAND gates")
+
+nand1 = c << sky130.components.sky130_fd_sc_hd__nand2_2()
+nand2 = c << sky130.components.sky130_fd_sc_hd__nand2_2()
+
+nand2.move((20, 20))
+
+route = gf.routing.get_route_electrical(nand1.ports['VPWR1'], nand2.ports['VPWR1'], radius=0.1)
 c.add(route.references)
-
-pc2.plot_matplotlib()
-plt.show()
