@@ -1,0 +1,13 @@
+* test python 3.11 + gdsfactory
+unit tests seem ok, may need some reference GDS files to pass all of them
+
+* deps + dev UX
+- `pip install gdsfactory[full,dev]`
+- download https://gdsfactory.github.io/skywater130/ (sky130 package) but make sure to use laatest version of gdsfactory, run `make install`
+
+* goal: implement NAND2Tetris chips
+** connect two NAND gates and form a NOT
+** form an AND
+** form an ALU
+* goal: print these chips with Google Skywater / Efabless MPW shuttle?
+https://www.hackster.io/news/efabless-google-and-skywater-are-enabling-us-mere-mortal-makers-to-design-our-own-open-source-asics-28917eb5357a
